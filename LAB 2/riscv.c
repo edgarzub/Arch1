@@ -118,6 +118,42 @@ bool interpret(char* instr){
 		int32_t read=read_address(adress,mem_file);
 		reg[atoi(ptr1)]=read;
 
+	}else if(op==5){
+		ptr1=strtok(tokens[1],"X");
+		ptr2=strtok(tokens[2],"X");
+		ptr3=strtok(tokens[3],"X");
+
+		//Get numerical value of registers
+		RS3=atoi(ptr1);
+		RS1=atoi(ptr2);
+		RS2=atoi(ptr3);
+		//operation
+		reg[RS3]=reg[RS1]&reg[RS2];
+		
+	}else if(op==6){
+		ptr1=strtok(tokens[1],"X");
+		ptr2=strtok(tokens[2],"X");
+		ptr3=strtok(tokens[3],"X");
+
+		//Get numerical value of registers
+		RS3=atoi(ptr1);
+		RS1=atoi(ptr2);
+		RS2=atoi(ptr3);
+		//operation
+		reg[RS3]=reg[RS1]^reg[RS2];
+		
+	}else if(op==7){
+		ptr1=strtok(tokens[1],"X");
+		ptr2=strtok(tokens[2],"X");
+		ptr3=strtok(tokens[3],"X");
+
+		//Get numerical value of registers
+		RS3=atoi(ptr1);
+		RS1=atoi(ptr2);
+		RS2=atoi(ptr3);
+		//operation
+		reg[RS3]=reg[RS1]|reg[RS2];
+		printf("The ADD has been completed");
 	}
 
 	return true;
@@ -137,9 +173,15 @@ int option(char** str){
 		return 3;
 	}else if(strcmp("LW",ptr)==0){
 		return 4;
+	}else if(strcmp("AND",ptr)==0){
+		return 5;
+	}else if(strcmp("XOR",ptr)==0){
+		return 6;
+	}else if(strcmp("OR",ptr)==0){
+		return 7;
 	}else{
 		return 0;
-	}
+	} 
 }
 
 char** parse(char** tokens,char* str){
